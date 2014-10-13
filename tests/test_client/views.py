@@ -20,6 +20,20 @@ def get_view(request):
     return HttpResponse(t.render(c))
 
 
+def trace_view(request):
+    """A simple view that expects a TRACE request, and echoes its status line
+    """
+    protocol = request.META["SERVER_PROTOCOL"]
+    t = Template('{{ method }} {{ uri }} {{ version }}', name="TRACE Template")
+    c = Context({
+        'method': request.method,
+        'uri': request.path,
+        'version': protocol
+    })
+
+    return HttpResponse(t.render(c))
+
+
 def post_view(request):
     """A view that expects a POST, and returns a different template depending
     on whether any POST data is available

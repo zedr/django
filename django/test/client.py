@@ -303,6 +303,10 @@ class RequestFactory(object):
         r.update(extra)
         return self.generic('HEAD', path, secure=secure, **r)
 
+    def trace(self, path, data='', secure=False, **extra):
+        """Construct a TRACE request"""
+        return self.generic('TRACE', path, data, secure=secure, **extra)
+
     def options(self, path, data='', content_type='application/octet-stream',
                 secure=False, **extra):
         "Construct an OPTIONS request."
